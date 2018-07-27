@@ -1,3 +1,7 @@
 from django.db import models
 
-# Create your models here.
+
+class BMI(models.Model):
+    age = models.PositiveIntegerField()
+    height = models.FloatField()
+    weight = models.FloatField()

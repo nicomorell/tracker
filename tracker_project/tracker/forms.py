@@ -1,16 +1,14 @@
 from django import forms
 
-BIRTH_YEAR_CHOICES = ('1980', '1981', '1982')
-FAVORITE_COLORS_CHOICES = (
-    ('blue', 'Blue'),
-    ('green', 'Green'),
-    ('black', 'Black'),
-)
+from .models import BMI
 
-class SimpleForm(forms.Form):
-    birth_year = forms.DateField(widget=forms.SelectDateWidget(years=BIRTH_YEAR_CHOICES))
-    favorite_colors = forms.MultipleChoiceField(
-        required=False,
-        widget=forms.CheckboxSelectMultiple,
-        choices=FAVORITE_COLORS_CHOICES,
-    )
+from django.core.validators import MaxValueValidator, MinValueValidator
+
+class BMIForm(forms.ModelForm):
+  #  weight = forms.FloatField(
+     #   validators=[MinValueValidator(0.9), MaxValueValidator(58)],
+
+ #   todays_date= forms.IntegerField(label="What is today's date?", widget=forms.Select(choices=weight)),
+    class Meta:
+        model = BMI
+        fields = ('age', 'height', 'weight')
