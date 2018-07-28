@@ -1,6 +1,9 @@
+from django.shortcuts import redirect
+
 from django.shortcuts import render
 
 from .forms import BMIForm
+
 
 from Tkinter import *
 
@@ -16,6 +19,16 @@ def index(request):
 
     return render(request, 'tracker/index.html', context_dict)
 
+
+
 def bmi(request):
-    form = BMIForm()
-    return render(request, 'tracker/bmi.html', {'form': form})
+    if request.method == "POST":
+        form = BMIForm(request.POST)
+        if form.is_valid():
+             bmi = form.save(commit=False)
+             bmi.author = request.user
+             bmi.save()
+             return redirect('index')
+    else:
+        form = BMIForm()
+        return render(request, 'tracker/bmi.html', {'form': form})
