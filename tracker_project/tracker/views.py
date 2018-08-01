@@ -22,13 +22,15 @@ def index(request):
 
 
 def bmi(request):
+    submitbutton = request.POST.get("submit")
     if request.method == "POST":
         form = BMIForm(request.POST)
         if form.is_valid():
-             bmi = form.save(commit=False)
-             bmi.author = request.user
-             bmi.save()
-             return redirect('index')
+            like = request.POST["display_type"]
+            bmi = form.save(commit=False)
+            bmi.author = request.user
+            bmi.save()
+        return redirect('index')
     else:
         form = BMIForm()
         return render(request, 'tracker/bmi.html', {'form': form})
