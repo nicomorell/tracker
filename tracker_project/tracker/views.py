@@ -2,8 +2,8 @@ from django.shortcuts import redirect
 
 from django.shortcuts import render
 
-from .forms import BMIForm
-
+from .forms import BMIFormImperial
+from .forms import BMIFormMetric
 
 from Tkinter import *
 
@@ -22,7 +22,7 @@ def index(request):
 
 
 def bmi(request):
-        form = BMIForm(request.POST)
+        form = BMIFormImperial(request.POST)
         if request.method == "POST" and form.is_valid():
             form.save(commit=False)
             form.save()
