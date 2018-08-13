@@ -15,8 +15,11 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('age', models.PositiveIntegerField()),
-                ('height', models.FloatField()),
-                ('weight', models.FloatField()),
+                ('heightFeet', models.FloatField()),
+                ('heightInches', models.FloatField(null=True, blank=True)),
+                ('heightMetres', models.PositiveIntegerField(blank=True)),
+                ('weightPounds', models.FloatField(null=True, blank=True)),
+                ('weightKilos', models.FloatField(null=True, blank=True)),
             ],
             options={
             },
