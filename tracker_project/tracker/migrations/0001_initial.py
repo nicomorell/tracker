@@ -14,8 +14,8 @@ class Migration(migrations.Migration):
             name='BMI',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('age', models.PositiveIntegerField()),
-                ('heightFeet', models.FloatField()),
+                ('age', models.PositiveIntegerField(blank=True)),
+                ('heightFeet', models.FloatField(blank=True)),
                 ('heightInches', models.FloatField(null=True, blank=True)),
                 ('heightMetres', models.PositiveIntegerField(blank=True)),
                 ('weightPounds', models.FloatField(null=True, blank=True)),

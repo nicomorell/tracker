@@ -2,8 +2,8 @@ from django.db import models
 
 
 class BMI(models.Model):
-    age = models.PositiveIntegerField(blank = False)
-    heightFeet = models.FloatField(blank = False)
+    age = models.PositiveIntegerField(blank = True, null = False)
+    heightFeet = models.FloatField(blank = True, null = False)
     heightInches = models.FloatField(blank = True, null=True)
     heightMetres = models.PositiveIntegerField(blank = True, null=False)
     weightPounds = models.FloatField(blank = True, null=True)

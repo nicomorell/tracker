@@ -19,14 +19,23 @@ def index(request):
 
 
 def bmi(request):
-        form = BMIForm(request.POST)
-        if request.method == "POST" and form.is_valid():
-            form.save(commit=False)
-            form.save()
-            calc_bmi = (form.cleaned_data['age'] / form.cleaned_data['heightFeet']) / form.cleaned_data['heightFeet']
-            return render(request, 'tracker/bmi.html', {'form': form, 'calc_bmi': calc_bmi})
+
+
+    form = BMIForm(request.POST)
+
+    if request.method == "POST" and form.is_valid():
+        form.save(commit=False)
+        form.save()
+
+        if (form.cleaned_data['age'] == None or form.cleaned_data['heightFeet'] == None):
+            return render(request, 'tracker/bmi.html', {'form': form})
 
         else:
-            form = BMIForm()
-            return render(request, 'tracker/bmi.html', {'form': form})
+            calc_bmi = (form.cleaned_data['age'] / form.cleaned_data['heightFeet']) / form.cleaned_data['heightFeet']
+        return render(request, 'tracker/bmi.html', {'form': form, 'calc_bmi': calc_bmi})
+
+    else:
+        form = BMIForm()
+        return render(request, 'tracker/bmi.html', {'form': form})
+
 
