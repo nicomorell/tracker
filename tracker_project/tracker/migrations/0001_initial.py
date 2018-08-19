@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
                 ('age', models.PositiveIntegerField(blank=True)),
                 ('heightFeet', models.FloatField(blank=True)),
                 ('heightInches', models.FloatField(null=True, blank=True)),
-                ('heightMetres', models.PositiveIntegerField(blank=True)),
+                ('heightMetres', models.FloatField(blank=True)),
                 ('weightPounds', models.FloatField(null=True, blank=True)),
                 ('weightKilos', models.FloatField(null=True, blank=True)),
             ],
