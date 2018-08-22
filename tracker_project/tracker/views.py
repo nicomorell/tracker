@@ -27,19 +27,24 @@ def bmi(request):
         form.save(commit=False)
         form.save()
 
-        if (form.cleaned_data['weightKilos'] == None or form.cleaned_data['heightMetres'] == None):
-            return render(request, 'tracker/bmi.html', {'form': form})
-
-        elif (form.cleaned_data['weightKilos'] != None and form.cleaned_data['heightMetres'] != None):
+        if (form.cleaned_data['weightKilos'] != None and form.cleaned_data['heightMetres'] != None):
+            print "hello1"
             calc_bmi = (form.cleaned_data['weightKilos'] / form.cleaned_data['heightMetres']) / form.cleaned_data['heightMetres']
             return render(request, 'tracker/bmi.html', {'form': form, 'calc_bmi': calc_bmi})
 
-        else:
-            calc_bmi = (form.cleaned_data['age'] / form.cleaned_data['heightFeet']) / form.cleaned_data['heightFeet']
+        elif(form.cleaned_data['weightPounds'] != None and form.cleaned_data['heightFeet'] != None and form.cleaned_data['heightInches'] != None):
+            print "hello2"
+            heightImperial = ((form.cleaned_data['heightFeet'] * 12) + form.cleaned_data['heightInches'])
+            heightImperial = heightImperial * heightImperial
+            weightImperial = form.cleaned_data['weightPounds'] * 703
+            calc_bmi = weightImperial / heightImperial
             return render(request, 'tracker/bmi.html', {'form': form, 'calc_bmi': calc_bmi})
+
+        else:
+            print "hello"
+            return render(request, 'tracker/bmi.html', {'form': form})
 
     else:
         form = BMIForm()
         return render(request, 'tracker/bmi.html', {'form': form})
-
 
