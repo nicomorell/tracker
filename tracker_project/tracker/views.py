@@ -19,18 +19,18 @@ def index(request):
 
 
 def bmi(request):
-
-
+    user_input = [11,12,13]
+    for x in user_input:
+        print(x)
     form = BMIForm(request.POST)
-
+    print user_input
     if request.method == "POST" and form.is_valid():
         form.save(commit=False)
         form.save()
-
         if (form.cleaned_data['weightKilos'] != None and form.cleaned_data['heightMetres'] != None):
             print "hello1"
             calc_bmi = (form.cleaned_data['weightKilos'] / form.cleaned_data['heightMetres']) / form.cleaned_data['heightMetres']
-            return render(request, 'tracker/bmi.html', {'form': form, 'calc_bmi': calc_bmi})
+            return render(request, 'tracker/bmi.html', {'form': form, 'calc_bmi': calc_bmi, 'user_input': user_input})
 
         elif(form.cleaned_data['weightPounds'] != None and form.cleaned_data['heightFeet'] != None and form.cleaned_data['heightInches'] != None):
             print "hello2"
