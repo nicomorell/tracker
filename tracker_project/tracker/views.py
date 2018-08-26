@@ -19,11 +19,10 @@ def index(request):
 
 
 def bmi(request):
-    user_input = [11,12,13]
+    user_input = [11, 12,13]
     for x in user_input:
         print(x)
     form = BMIForm(request.POST)
-    print user_input
     if request.method == "POST" and form.is_valid():
         form.save(commit=False)
         form.save()
@@ -48,3 +47,14 @@ def bmi(request):
         form = BMIForm()
         return render(request, 'tracker/bmi.html', {'form': form})
 
+def weight(request):
+
+    # Construct a dictionary to pass to the template engine as its context.
+    # Note the key boldmessage is the same as {{ boldmessage }} in the template!
+    context_dict = {'boldmessage': "I am bold font from the context"}
+
+    # Return a rendered response to send to the client.
+    # We make use of the shortcut function to make our lives easier.
+    # Note that the first parameter is the template we wish to use.
+
+    return render(request, 'tracker/weight.html', context_dict)

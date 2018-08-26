@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+{% extends 'tracker/base.html' %}
+{% block body_block %}
+    <h1>New post</h1>
+
+<script>
+
+function hideMetric(x) {
+	if (x.checked) {
+		document.getElementById("Metric").style.display = "none";
+    	  	document.getElementById("Imperial").style.display = "block";
+  	}
+}
+
+function hideImperial(x) {
+	if (x.checked) {
+		document.getElementById("Imperial").style.display = "none";
+	        document.getElementById("Metric").style.display = "block";
+   	}
+}
+</script>
+
+<input type="radio" onchange="hideImperial(this)" name="metricorimperial" checked>Metric |
+<input type="radio" onchange="hideMetric(this)" name="metricorimperial">Imperial
+
+    <form method="POST" class="post-form">
+	{% csrf_token %}
+	Age:{{ form.age}}
+	<div id="Metric">
+    		{{ field.errors }}
+		 Height:{{form.heightMetres}} metres
+		<br/>
+		 Weight:{{form.weightKilos}} kilos
+		<br/>
+{{calc_bmi}}
+	</div>
+
+<div id="Imperial" style="display:none">
+
+	{{ field.errors }}
+	Height:{{form.heightFeet}} ft
+	<br/>
+	Weight:{{form.heightInches}} in
+	<br/>
+	Weight:{{form.weightPounds}} lbs
+	<br/>
+{{calc_bmi}}
+{{user_input}}
+</div>
+        <button type="submit" class="save btn">Save</button>
+    </form>
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name = "viewport" content="width, initial-scale=1.0">
+    <meta http-equiv"X-UA-Compatible" content ="ie=edge">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js">
+<link rel = "stylesheet" href = "https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</script>
+  </head>
+  <body>
+  <div class = "container">
+	<canvas id="lineChart" height = "400" width = "400"></canvas>
+</div>
+
+<script>
+const  myChart = document.getElementById('lineChart').getContext('2d');
+console.log(myChart);
+var cars = ["Saab", "Volvo", "BMW"];
+test2 = [12, 19, 3, 5, 2, 3]
+            var month = [];
+            var customers = [];
+let lineChart = new Chart(myChart, {
+type: 'line',
+data: {
+        labels: month,
+        datasets: [{
+            label: '# of Votes',
+            data: customers,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>
+{{user_input}} = 60
+<script type="text/javascript">
+   var a = "{{user_input}}";
+</script>
+  <script>
+              for(var i in cars) {
+                month.push("Customer in " + cars[i]);
+                customers.push(test2[i]);
+                lineChart.update();
+            }
+</script>
+<script>
+function addData() {
+
+	month.push("Customer in " + "Newly Added");
+	customers.push(23);
+	lineChart.update();
+}
+</script>
+        <input type = "button" value = "Add Data" onclick = "addData()">
+  </body>
+{% endblock %}
+</html>
+

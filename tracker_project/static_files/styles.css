@@ -1,0 +1,18 @@
+
+body {
+    background-color: powderblue;
+}
+h1 {
+    color: red;
+}
+
+.post-form {
+    color: #003366;
+    background-color: red;
+    list-style-type: none;
+}
+
+li {
+    color: #003366;
+    background-color: red;
+}
