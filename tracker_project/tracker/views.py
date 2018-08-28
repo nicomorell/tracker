@@ -2,7 +2,7 @@ from django.shortcuts import redirect
 
 from django.shortcuts import render
 
-from .forms import BMIForm
+from .forms import BMIForm, weightForm
 
 def index(request):
 
@@ -48,13 +48,15 @@ def bmi(request):
         return render(request, 'tracker/bmi.html', {'form': form})
 
 def weight(request):
+    form = weightForm(request.POST)
+    if request.method == "POST" and form.is_valid():
+        print("hello")
+        form.save()
 
-    # Construct a dictionary to pass to the template engine as its context.
-    # Note the key boldmessage is the same as {{ boldmessage }} in the template!
-    context_dict = {'boldmessage': "I am bold font from the context"}
+        return render(request, 'tracker/weight.html', {'form': form})
 
-    # Return a rendered response to send to the client.
-    # We make use of the shortcut function to make our lives easier.
-    # Note that the first parameter is the template we wish to use.
+    else:
+        print("hello1")
+        form = weightForm()
+        return render(request, 'tracker/weight.html', {'form': form})
 
-    return render(request, 'tracker/weight.html', context_dict)

@@ -8,6 +8,12 @@ class BMI(models.Model):
     heightMetres = models.FloatField(blank = True, null=False)
     weightPounds = models.FloatField(blank = True, null=True)
     weightKilos = models.FloatField(blank = True, null=True)
+    
+class Weight(models.Model):
+    mass = models.FloatField()
+    day = models.PositiveIntegerField()
+    month = models.PositiveIntegerField()
+    year = models.PositiveIntegerField()
 
 
 
