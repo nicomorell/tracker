@@ -54,7 +54,6 @@ def weight(request):
         form.save()
 
         return render(request, 'tracker/weight.html', {'form': form})
-
     else:
         print("hello1")
         form = weightForm()

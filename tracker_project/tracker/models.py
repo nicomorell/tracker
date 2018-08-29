@@ -10,10 +10,10 @@ class BMI(models.Model):
     weightKilos = models.FloatField(blank = True, null=True)
     
 class Weight(models.Model):
-    mass = models.FloatField(blank = True, null = False)
+    mass = models.FloatField(blank = True, null = True)
     day = models.PositiveIntegerField(blank = True, null=True)
     month = models.PositiveIntegerField(blank = True, null=True)
-    year = models.PositiveIntegerField(blank = True, null=True)
+    year = models.PositiveIntegerField(blank = True, null=False)
 
 
 
