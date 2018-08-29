@@ -6,7 +6,15 @@
     <form method="POST" class="post-form">
 	{% csrf_token %}
     		{{ field.errors }}
-		 Weight:{{form.day}} metres
+{{ form.errors }}
+{{ form.non_field_errors }}
+		 Weight:{{form.mass}} kg
+		<br/>
+		 Day:{{form.mass}}
+		<br/>
+		 Month:{{form.mass}} 
+		<br/>
+		 Year:{{form.mass}} 
 		<br/>
         <button type="submit" class="save btn">Save</button>
 </form>
