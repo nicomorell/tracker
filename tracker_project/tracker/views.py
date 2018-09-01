@@ -56,8 +56,10 @@ def weight(request):
     if request.method == "POST" and form.is_valid():
         print("hello")
         form.save()
-        mass1 = form.cleaned_data['mass']
-        print(mass1)
+        json1 =[form.cleaned_data['mass'],form.cleaned_data['day']]
+        mass1 = json.dumps(json1)
+        for x in mass1:
+            print(x)
 
         return render(request, 'tracker/weight.html', {'form': form, 'mass1':mass1})
     else:
