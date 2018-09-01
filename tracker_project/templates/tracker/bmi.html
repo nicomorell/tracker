@@ -110,11 +110,11 @@ data: {
 </script>
 {{user_input}} = 60
 <script type="text/javascript">
-   var a = "{{user_input}}";
+   var a = {{user_input|safe}};
 </script>
   <script>
-              for(var i in cars) {
-                month.push("Customer in " + cars[i]);
+              for(var i in a) {
+                month.push("Customer in " + a[i]);
                 customers.push(test2[i]);
                 lineChart.update();
             }
@@ -131,4 +131,3 @@ function addData() {
   </body>
 {% endblock %}
 </html>
-

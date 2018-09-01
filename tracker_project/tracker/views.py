@@ -4,6 +4,8 @@ from django.shortcuts import render
 
 from .forms import BMIForm, weightForm
 
+import json
+
 def index(request):
 
     # Construct a dictionary to pass to the template engine as its context.
@@ -19,7 +21,9 @@ def index(request):
 
 
 def bmi(request):
-    user_input = [11, 12,13]
+
+    json1 = [11, 12, 13]
+    user_input = json.dumps(json1)
     for x in user_input:
         print(x)
     form = BMIForm(request.POST)
@@ -37,23 +41,25 @@ def bmi(request):
             heightImperial = heightImperial * heightImperial
             weightImperial = form.cleaned_data['weightPounds'] * 703
             calc_bmi = weightImperial / heightImperial
-            return render(request, 'tracker/bmi.html', {'form': form, 'calc_bmi': calc_bmi})
+            return render(request, 'tracker/bmi.html', {'form': form, 'calc_bmi': calc_bmi, 'user_input': user_input})
 
         else:
             print "hello"
-            return render(request, 'tracker/bmi.html', {'form': form})
+            return render(request, 'tracker/bmi.html', {'form': form, 'user_input': user_input})
 
     else:
         form = BMIForm()
-        return render(request, 'tracker/bmi.html', {'form': form})
+        return render(request, 'tracker/bmi.html', {'form': form, 'user_input': user_input})
 
 def weight(request):
     form = weightForm(request.POST)
     if request.method == "POST" and form.is_valid():
         print("hello")
         form.save()
+        mass1 = form.cleaned_data['mass']
+        print(mass1)
 
-        return render(request, 'tracker/weight.html', {'form': form})
+        return render(request, 'tracker/weight.html', {'form': form, 'mass1':mass1})
     else:
         print("hello1")
         form = weightForm()
