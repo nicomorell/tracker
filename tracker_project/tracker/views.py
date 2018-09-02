@@ -3,8 +3,9 @@ from django.shortcuts import redirect
 from django.shortcuts import render
 
 from .forms import BMIForm, weightForm
-
 import json
+
+json1 = []
 
 def index(request):
 
@@ -24,7 +25,7 @@ def bmi(request):
 
     json1 = [11, 12, 13]
     user_input = json.dumps(json1)
-    for x in user_input:
+    for x in json1:
         print(x)
     form = BMIForm(request.POST)
     if request.method == "POST" and form.is_valid():
@@ -56,10 +57,11 @@ def weight(request):
     if request.method == "POST" and form.is_valid():
         print("hello")
         form.save()
-        json1 =[form.cleaned_data['mass'],form.cleaned_data['day']]
+
+        if json1 != [form.cleaned_data['mass']]:
+            json1.append(form.cleaned_data['mass'])
+            print json1
         mass1 = json.dumps(json1)
-        for x in mass1:
-            print(x)
 
         return render(request, 'tracker/weight.html', {'form': form, 'mass1':mass1})
     else:
