@@ -8,7 +8,8 @@ class BMIForm(forms.ModelForm):
         fields = ('age', 'heightFeet', 'heightMetres', 'heightInches', 'weightPounds', 'weightKilos')
 
 class weightForm(forms.ModelForm):
-
+    changeWeight = forms.FloatField(label='Weight')
+    changeDay = forms.IntegerField(label='Day')
     class Meta:
         model = Weight
         fields = ('mass', 'day', 'month', 'year')

@@ -62,9 +62,17 @@ def weight(request):
         if massJson != [form.cleaned_data['mass']]:
             massJson.append(form.cleaned_data['mass'])
             dayJson.append(form.cleaned_data['day'])
-            print massJson
+            try:
+                if dayJson[1]:
+                    dayJson[0] = 2
+            except IndexError:
+                print("doesn't exist")
+
+
+
         mass1 = json.dumps(massJson)
         day1 = json.dumps(dayJson)
+
         return render(request, 'tracker/weight.html', {'form': form, 'mass1':mass1, 'day1' : day1})
     else:
         print("hello1")

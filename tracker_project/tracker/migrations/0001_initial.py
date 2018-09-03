@@ -29,8 +29,8 @@ class Migration(migrations.Migration):
             name='Weight',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('mass', models.FloatField(null=True, blank=True)),
-                ('day', models.PositiveIntegerField(null=True, blank=True)),
+                ('mass', models.FloatField(null=True)),
+                ('day', models.PositiveIntegerField(null=True)),
                 ('month', models.PositiveIntegerField(null=True, blank=True)),
                 ('year', models.PositiveIntegerField(blank=True)),
             ],
