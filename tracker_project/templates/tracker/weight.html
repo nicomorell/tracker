@@ -39,15 +39,15 @@ const  myChart = document.getElementById('lineChart').getContext('2d');
 console.log(myChart);
 var cars = ["Saab", "Volvo", "BMW"];
 test2 = [12, 19, 3, 5, 2, 3]
-            var month = [];
-            var customers = [];
+            var date = [];
+            var weight = [];
 let lineChart = new Chart(myChart, {
 type: 'line',
 data: {
-        labels: month,
+        labels: date,
         datasets: [{
             label: '# of Votes',
-            data: customers,
+            data: weight,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -83,10 +83,16 @@ data: {
    var a = {{mass1|safe}};
       document.write(a);
 </script>
+
+<script type="text/javascript">
+   var b = {{day1|safe}};
+      document.write(a);
+</script>
+
   <script>
               for(var i in a) {
-                month.push("Customer in " + a[i]);
-                customers.push(test2[i]);
+                weight.push(a[i]);
+                date.push(b[i]);
                 lineChart.update();
             }
 </script>

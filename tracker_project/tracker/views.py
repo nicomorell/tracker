@@ -5,7 +5,8 @@ from django.shortcuts import render
 from .forms import BMIForm, weightForm
 import json
 
-json1 = []
+massJson = []
+dayJson = []
 
 def index(request):
 
@@ -58,12 +59,13 @@ def weight(request):
         print("hello")
         form.save()
 
-        if json1 != [form.cleaned_data['mass']]:
-            json1.append(form.cleaned_data['mass'])
-            print json1
-        mass1 = json.dumps(json1)
-
-        return render(request, 'tracker/weight.html', {'form': form, 'mass1':mass1})
+        if massJson != [form.cleaned_data['mass']]:
+            massJson.append(form.cleaned_data['mass'])
+            dayJson.append(form.cleaned_data['day'])
+            print massJson
+        mass1 = json.dumps(massJson)
+        day1 = json.dumps(dayJson)
+        return render(request, 'tracker/weight.html', {'form': form, 'mass1':mass1, 'day1' : day1})
     else:
         print("hello1")
         form = weightForm()
