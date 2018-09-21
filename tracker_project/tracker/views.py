@@ -7,7 +7,7 @@ import json
 
 massJson = []
 dayJson = []
-test1 = []
+monthJson = []
 def index(request):
 
     # Construct a dictionary to pass to the template engine as its context.
@@ -62,7 +62,7 @@ def weight(request):
         if massJson != [form.cleaned_data['mass']]:
             massJson.append(form.cleaned_data['mass'])
             dayJson.append(form.cleaned_data['day'])
-            test1.append(form.cleaned_data['prevDay'])
+            monthJson.append(form.cleaned_data['month'])
             try:
                 if massJson.index(form.cleaned_data['prevWeight']) == dayJson.index(form.cleaned_data['prevDay']):
                     a = massJson.index(form.cleaned_data['prevWeight'])
@@ -77,12 +77,11 @@ def weight(request):
                 print("doesn't exist")
                 print(dayJson[0])
 
-
-
         mass1 = json.dumps(massJson)
         day1 = json.dumps(dayJson)
+        month1 = json.dumps(monthJson)
 
-        return render(request, 'tracker/weight.html', {'form': form, 'mass1':mass1, 'day1' : day1})
+        return render(request, 'tracker/weight.html', {'form': form, 'mass1':mass1, 'day1' : day1, 'month1' : month1})
     else:
         print("hello1")
         form = weightForm()
