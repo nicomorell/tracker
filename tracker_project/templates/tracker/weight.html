@@ -16,19 +16,11 @@
 		<br/>
 		 Year:{{form.year}}
 		<br/>
+    Change Weight:{{form.prevWeight}} to {{form.afterWeight}}
+    <br/>
+    Change Day:{{form.prevDay}} to {{form.afterDay}}
+    <br/>
         <button type="submit" class="save btn">Save</button>
-</form>
-<form method="POST" class="post-form">
-{% csrf_token %}
-    {{ field.errors }}
-{{ form.errors }}
-{{ form.non_field_errors }}
- Weight:{{form.changeWeight}} kg
-<br/>
- Day:{{form.changeDay}}
-<br/>
-
-    <button type="submit" class="save btn">Save</button>
 </form>
 {{mass1}}
 
@@ -103,7 +95,7 @@ data: {
       document.write(a);
 </script>
 
-  <script>
+<script>
               for(var i in a) {
                 weight.push(a[i]);
                 date.push(b[i]);

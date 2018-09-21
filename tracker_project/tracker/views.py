@@ -7,7 +7,7 @@ import json
 
 massJson = []
 dayJson = []
-
+test1 = []
 def index(request):
 
     # Construct a dictionary to pass to the template engine as its context.
@@ -62,11 +62,28 @@ def weight(request):
         if massJson != [form.cleaned_data['mass']]:
             massJson.append(form.cleaned_data['mass'])
             dayJson.append(form.cleaned_data['day'])
+            test1.append(form.cleaned_data['prevDay'])
             try:
-                if dayJson[1]:
-                    dayJson[0] = 2
+                for x in dayJson:
+                    print(x)
+                    c = dayJson[x-1]
+                    c = str(c)
+                    print("dayJson is" + c)
+                    b = massJson[x-1]
+                    b = str(b)
+                    print("massJson is" + b)
+                    try:
+                        if dayJson[x-1] == form.cleaned_data['prevDay'] and massJson[x-1] == form.cleaned_data['prevWeight']:
+                           print(x-1)
+                           print("Good")
+                           dayJson[x-1] = form.cleaned_data['afterDay']
+                           massJson[x-1] = form.cleaned_data['afterWeight']
+                    except IndexError:
+                        print(x)
+                        print("BAD")
             except IndexError:
                 print("doesn't exist")
+                print(dayJson[0])
 
 
 
