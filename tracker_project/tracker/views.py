@@ -64,24 +64,16 @@ def weight(request):
             dayJson.append(form.cleaned_data['day'])
             test1.append(form.cleaned_data['prevDay'])
             try:
-                for x in dayJson:
-                    print(x)
-                    c = dayJson[x-1]
-                    c = str(c)
-                    print("dayJson is" + c)
-                    b = massJson[x-1]
-                    b = str(b)
-                    print("massJson is" + b)
-                    try:
-                        if dayJson[x-1] == form.cleaned_data['prevDay'] and massJson[x-1] == form.cleaned_data['prevWeight']:
-                           print(x-1)
-                           print("Good")
-                           dayJson[x-1] = form.cleaned_data['afterDay']
-                           massJson[x-1] = form.cleaned_data['afterWeight']
-                    except IndexError:
-                        print(x)
-                        print("BAD")
-            except IndexError:
+                if massJson.index(form.cleaned_data['prevWeight']) == dayJson.index(form.cleaned_data['prevDay']):
+                    a = massJson.index(form.cleaned_data['prevWeight'])
+                    b = str(a)
+                    c = dayJson.index(form.cleaned_data['prevDay'])
+                    d = str(a)
+                    print("prevWeight index is " + b)
+                    if form.cleaned_data['afterDay'] and form.cleaned_data['afterWeight']:
+                        dayJson[c] = form.cleaned_data['afterDay']
+                        massJson[a] = form.cleaned_data['afterWeight']
+            except Exception:
                 print("doesn't exist")
                 print(dayJson[0])
 
@@ -95,4 +87,3 @@ def weight(request):
         print("hello1")
         form = weightForm()
         return render(request, 'tracker/weight.html', {'form': form})
-
