@@ -8,11 +8,22 @@
 
     <body>
 
-        <h1>Weight Tracker</h1>
+      {% if user.is_authenticated %}
+      <h1>Welcome to Weight Tracker, {{ user.username }}!</h1>
+      {% else %}
+      <h1>Weight Tracker</h1>
+      {% endif %}
 <div class="my-class">
   <br>
 	<a href="/tracker/bmi/">Click here to calculate your BMI</a> <br><br><br>
-	<a href="/tracker/weight/">Click here to track your weight</a>
+	<a href="/tracker/weight/">Click here to track your weight</a><br>
+  {% if user.is_authenticated %}
+  <a href="/tracker/restricted/">Restricted Page</a><br />
+  <a href="/tracker/logout/">Logout</a><br />
+  {% else %}
+  <a href="/tracker/register/">Register Here</a> <br>
+  <a href="/tracker/login/">Login</a> <br>
+  {% endif %}
 </div>
     </body>
 

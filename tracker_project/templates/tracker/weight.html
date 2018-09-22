@@ -8,11 +8,7 @@
     		{{ field.errors }}
 {{ form.errors }}
 {{ form.non_field_errors }}
-<table>
-  <td>
-      <label for="{{ form.mass }}" style="display:inline-block;vertical-align:middle">{{ form.mass }}</label>
-</td>
-     <table>
+    Weight: {{form.mass}}
 		<br/>
 		 Day:{{form.day}}
 		<br/>
@@ -26,9 +22,6 @@
     <br/>
         <button type="submit" class="save btn">Save</button>
 </form>
-{{mass1}}
-
-
  <head>
     <meta charset="UTF-8">
     <meta name = "viewport" content="width, initial-scale=1.0">
@@ -45,12 +38,8 @@
 <script>
 const  myChart = document.getElementById('lineChart').getContext('2d');
 console.log(myChart);
-var test = false;
-var time = 11;
-var cars = ["Saab", "Volvo", "BMW"];
-test2 = [12, 19, 3, 5, 2, 3]
-            var date = [];
-            var weight = [];
+var date = [];
+var weight = [];
 let lineChart = new Chart(myChart, {
 type: 'line',
 data: {
@@ -88,7 +77,6 @@ data: {
     }
 });
 </script>
-{{user_input}} = 60
 <script type="text/javascript">
    var a = {{mass1|safe}};
       document.write(a);
@@ -105,13 +93,6 @@ data: {
                 date.push(b[i]);
                 lineChart.update();
             }
-</script>
-<script>
-function addData() {
-	month.push("Customer in " + "Newly Added");
-	customers.push(23);
-	lineChart.update();
-}
 </script>
         <input type = "button" value = "Add Data" onclick = "addData()">
   </body>
