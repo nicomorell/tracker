@@ -8,7 +8,11 @@
     		{{ field.errors }}
 {{ form.errors }}
 {{ form.non_field_errors }}
-		 Weight:{{form.mass}} kg
+<table>
+  <td>
+      <label for="{{ form.mass }}" style="display:inline-block;vertical-align:middle">{{ form.mass }}</label>
+</td>
+     <table>
 		<br/>
 		 Day:{{form.day}}
 		<br/>

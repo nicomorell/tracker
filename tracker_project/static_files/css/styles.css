@@ -7,7 +7,7 @@ h1 {
     text-transform: uppercase;
     letter-spacing: .5em;
     position: absolute;
-    top: 25%;
+    top: 8%;
     width: 100%;
 }
 
@@ -42,6 +42,15 @@ span:after {
 .my-class {
   text-align: center;
   font-size : 200%;
+}
+table {
+
+  margin: 0 auto;
+  }
+
+.prevWeight {
+  text-align: center;
+    margin: 0 auto;
 }
 /* Style the tab */
 .tab {
