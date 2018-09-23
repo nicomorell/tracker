@@ -11,6 +11,7 @@ import json
 massJson = []
 dayJson = []
 monthJson = []
+
 def index(request):
 
     # Construct a dictionary to pass to the template engine as its context.
@@ -23,44 +24,34 @@ def index(request):
 
     return render(request, 'tracker/index.html', context_dict)
 
-
-
 def bmi(request):
 
-    json1 = [11, 12, 13]
-    user_input = json.dumps(json1)
-    for x in json1:
-        print(x)
     form = BMIForm(request.POST)
     if request.method == "POST" and form.is_valid():
-        form.save(commit=False)
-        form.save()
+        bmi = form.save(commit = False)
+        bmi.user = request.user
+        bmi.save()
         if (form.cleaned_data['weightKilos'] != None and form.cleaned_data['heightMetres'] != None):
-            print "hello1"
             calc_bmi = (form.cleaned_data['weightKilos'] / form.cleaned_data['heightMetres']) / form.cleaned_data['heightMetres']
-            return render(request, 'tracker/bmi.html', {'form': form, 'calc_bmi': calc_bmi, 'user_input': user_input})
+            return render(request, 'tracker/bmi.html', {'form': form, 'calc_bmi': calc_bmi})
 
         elif(form.cleaned_data['weightPounds'] != None and form.cleaned_data['heightFeet'] != None and form.cleaned_data['heightInches'] != None):
-            print "hello2"
             heightImperial = ((form.cleaned_data['heightFeet'] * 12) + form.cleaned_data['heightInches'])
             heightImperial = heightImperial * heightImperial
             weightImperial = form.cleaned_data['weightPounds'] * 703
             calc_bmi = weightImperial / heightImperial
-            return render(request, 'tracker/bmi.html', {'form': form, 'calc_bmi': calc_bmi, 'user_input': user_input})
+            return render(request, 'tracker/bmi.html', {'form': form, 'calc_bmi': calc_bmi})
 
         else:
-            print "hello"
-            return render(request, 'tracker/bmi.html', {'form': form, 'user_input': user_input})
+            return render(request, 'tracker/bmi.html', {'form': form})
 
     else:
         form = BMIForm()
-        return render(request, 'tracker/bmi.html', {'form': form, 'user_input': user_input})
+        return render(request, 'tracker/bmi.html', {'form': form})
 
 def weight(request):
     form = weightForm(request.POST)
     if request.method == "POST" and form.is_valid():
-        print("hello")
-        form.save()
 
         if massJson != [form.cleaned_data['mass']]:
             massJson.append(form.cleaned_data['mass'])
@@ -68,23 +59,21 @@ def weight(request):
             monthJson.append(form.cleaned_data['month'])
             try:
                 if massJson.index(form.cleaned_data['prevWeight']) == dayJson.index(form.cleaned_data['prevDay']):
-                    a = massJson.index(form.cleaned_data['prevWeight'])
-                    b = str(a)
-                    c = dayJson.index(form.cleaned_data['prevDay'])
-                    d = str(a)
-                    print("prevWeight index is " + b)
+                    massIndex = massJson.index(form.cleaned_data['prevWeight'])
+                    dayIndex = dayJson.index(form.cleaned_data['prevDay'])
                     if form.cleaned_data['afterDay'] and form.cleaned_data['afterWeight']:
-                        dayJson[c] = form.cleaned_data['afterDay']
-                        massJson[a] = form.cleaned_data['afterWeight']
+                        massJson[massIndex] = form.cleaned_data['afterWeight']
+                        dayJson[dayIndex] = form.cleaned_data['afterDay']
+
             except Exception:
-                print("doesn't exist")
+                print("Doesn't exist")
                 print(dayJson[0])
 
-        mass1 = json.dumps(massJson)
-        day1 = json.dumps(dayJson)
+        massGraph = json.dumps(massJson)
+        dayGraph = json.dumps(dayJson)
         month1 = json.dumps(monthJson)
-
-        return render(request, 'tracker/weight.html', {'form': form, 'mass1':mass1, 'day1' : day1, 'month1' : month1})
+        form.save(commit = True)
+        return render(request, 'tracker/weight.html', {'form': form, 'massGraph':massGraph, 'dayGraph' : dayGraph, 'month1' : month1})
     else:
         print("hello1")
         form = weightForm()
@@ -187,10 +176,6 @@ def user_login(request):
         # No context variables to pass to the template system, hence the
         # blank dictionary object...
         return render(request, 'tracker/login.html', {})
-
-@login_required
-def restricted(request):
-    return HttpResponse("Since you're logged in, you can see this text!")
 
 @login_required
 def user_logout(request):

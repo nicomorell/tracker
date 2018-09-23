@@ -8,12 +8,6 @@
     <body>
         <h1>Register with Tracker</h1>
 
-        {% if registered %}
-        Rango says: <strong>thank you for registering!</strong>
-        <a href="/tracker/">Return to the homepage.</a><br />
-        {% else %}
-        Rango says: <strong>register here!</strong><br />
-
         <form id="user_form" method="post" action="/tracker/register/"
                 enctype="multipart/form-data">
 
@@ -28,7 +22,7 @@
             <!-- Provide a button to click to submit the form. -->
             <input type="submit" name="submit" value="Register" />
         </form>
-        {% endif %}
     </body>
 {% endblock %}
 </html>
+

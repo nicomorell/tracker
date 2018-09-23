@@ -1,3 +1,5 @@
+
+
 body {
 	background: #e7ecea;
 	color: #74777b;
@@ -14,6 +16,20 @@ a {
 
 a:hover, a:focus {
 	color: #74777b;
+}
+
+.buttons {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 12px 4px;
+    cursor: pointer;
+    width: 100%;
 }
 
 .support {
@@ -90,9 +106,43 @@ span:after {
   text-align: center;
   font-size : 200%;
 }
+.post-form {
+	display: block;
+	transition: all 0.3s ease-out;
+	padding: 5px;
+	color: #2CC185;
+text-align: center;
+font-family:customfont;
+	margin: 0 auto;
+	width: 100%;
+}
+.Metric {
+    display: block;
+    transition: all 0.3s ease-out;
+    padding: 5px;
+    color: #2CC185;
+	text-align: center;
+	font-family:customfont;
+    margin: 0 auto;
+		width: 60%;
+}
 
-  input{width:10%;padding:10px;box-sizing:border-box;background:none;outline:none;resize:none;border:0;font-family:'Montserrat',sans-serif;transition:all .3s;border-bottom:2px solid #bebed2}
-  input:focus{border-bottom:2px solid #78788c}
+  input{
+		width:10%;
+		padding:10px;
+		box-sizing:border-box;
+		background:none;
+		outline:none;
+		resize:none;
+		border:0;
+		font-family:'Montserrat',sans-serif;
+		transition:all .3s;
+		border-bottom:2px solid #bebed2
+	}
+
+  input:focus{
+		border-bottom:2px solid #78788c
+	}
 
   span{margin:0 5px 0 15px}
 

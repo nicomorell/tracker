@@ -3,98 +3,98 @@
 {% extends 'tracker/base.html' %}
 {% block body_block %}
 
-    <form method="POST" class="post-form">
-	{% csrf_token %}
-    		{{ field.errors }}
-{{ form.errors }}
-{{ form.non_field_errors }}
-    Weight: {{form.mass}}
-		<br/>
-		 Day:{{form.day}}
-		<br/>
-		 Month:{{form.month}}
-		<br/>
-		 Year:{{form.year}}
-		<br/>
-    Change Weight:{{form.prevWeight}} to {{form.afterWeight}}
-    <br/>
-    Change Day:{{form.prevDay}} to {{form.afterDay}}
-    <br/>
-        <button type="submit" class="save btn">Save</button>
+<form method="POST" class="post-form">
+  {% csrf_token %}
+  {{ field.errors }}
+  {{ form.errors }}
+  {{ form.non_field_errors }}
+  Weight: {{form.mass}}
+  <br/>
+  Day:{{form.day}}
+  <br/>
+  Month:{{form.month}}
+  <br/>
+  Year:{{form.year}}
+  <br/>
+  Change Weight:{{form.prevWeight}} to {{form.afterWeight}}
+  <br/>
+  Change Day:{{form.prevDay}} to {{form.afterDay}}
+  <br/>
+  <button type="submit" class="save btn">Save</button>
 </form>
- <head>
-    <meta charset="UTF-8">
-    <meta name = "viewport" content="width, initial-scale=1.0">
-    <meta http-equiv"X-UA-Compatible" content ="ie=edge">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js">
-<link rel = "stylesheet" href = "https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<head>
+  <meta charset="UTF-8">
+  <meta name = "viewport" content="width, initial-scale=1.0">
+  <meta http-equiv"X-UA-Compatible" content ="ie=edge">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js">
+  <link rel = "stylesheet" href = "https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 </script>
-  </head>
-  <body>
+</head>
+<body>
   <div class = "container">
-	<canvas id="lineChart" height = "400" width = "400"></canvas>
-</div>
+    <canvas id="lineChart" height = "400" width = "400"></canvas>
+  </div>
 
-<script>
-const  myChart = document.getElementById('lineChart').getContext('2d');
-console.log(myChart);
-var date = [];
-var weight = [];
-let lineChart = new Chart(myChart, {
-type: 'line',
-data: {
-        labels: date,
-        datasets: [{
-            label: '# of Votes',
-            data: weight,
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
+  <script>
+  const  myChart = document.getElementById('lineChart').getContext('2d');
+  console.log(myChart);
+  var date = [];
+  var weight = [];
+  let lineChart = new Chart(myChart, {
+    type: 'line',
+    data: {
+      labels: date,
+      datasets: [{
+        label: '# of Votes',
+        data: weight,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255,99,132,1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }]
     },
     options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
-            }]
-        }
+      responsive:true,
+      maintainAspectRatio: false,
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero:true
+          }
+        }]
+      }
     }
-});
+  });
 </script>
 <script type="text/javascript">
-   var a = {{mass1|safe}};
-      document.write(a);
+var weightGraph = {{massGraph|safe}};
 </script>
 
 <script type="text/javascript">
-   var b = {{day1|safe}};
-      document.write(a);
+var dayGraph = {{dayGraph|safe}};
 </script>
 
 <script>
-              for(var i in a) {
-                weight.push(a[i]);
-                date.push(b[i]);
-                lineChart.update();
-            }
+for(var i in weightGraph) {
+  weight.push(weightGraph[i]);
+  date.push(dayGraph[i]);
+  lineChart.update();
+}
 </script>
-        <input type = "button" value = "Add Data" onclick = "addData()">
-  </body>
+
+</body>
 {% endblock %}
 </html>

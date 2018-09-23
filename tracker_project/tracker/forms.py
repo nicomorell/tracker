@@ -17,8 +17,8 @@ class weightForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(weightForm, self).__init__(*args, **kwargs)
-        self.fields['prevWeight'].widget.attrs['placeholder'] = 'Previous Weight'
         self.fields['prevWeight'].widget.attrs.update({'class': 'myfieldclass'})
+
     class Meta:
         model = Weight
         fields = ('mass', 'day', 'month', 'year')
@@ -29,6 +29,9 @@ class UserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'password')
+        help_texts = {
+            'username': None,
+        }
 
 class UserProfileForm(forms.ModelForm):
     class Meta:

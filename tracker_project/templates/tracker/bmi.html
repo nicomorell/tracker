@@ -2,54 +2,56 @@
 <html>
 {% extends 'tracker/base.html' %}
 {% block body_block %}
-    <h1>Calculate your BMI</h1>
+<h1>Calculate your BMI</h1>
 
 <script>
 
 function hideMetric(x) {
-	if (x.checked) {
-		document.getElementById("Metric").style.display = "none";
-    	  	document.getElementById("Imperial").style.display = "block";
-  	}
+  if (x.checked) {
+    document.getElementById("Metric").style.display = "none";
+    document.getElementById("Imperial").style.display = "block";
+  }
 }
 
 function hideImperial(x) {
-	if (x.checked) {
-		document.getElementById("Imperial").style.display = "none";
-	        document.getElementById("Metric").style.display = "block";
-   	}
+  if (x.checked) {
+    document.getElementById("Imperial").style.display = "none";
+    document.getElementById("Metric").style.display = "block";
+  }
 }
 </script>
 <br>
 <br>
+<div id = "buttons" class = "buttons">
 <input type="radio" onchange="hideImperial(this)" name="metricorimperial" checked>Metric |
 <input type="radio" onchange="hideMetric(this)" name="metricorimperial">Imperial
-
-    <form method="POST" class="post-form">
-	{% csrf_token %}
-	Age:{{ form.age}}
-	<div id="Metric">
-    		{{ field.errors }}
-		 Height:{{form.heightMetres}} metres
-		<br/>
-		 Weight:{{form.weightKilos}} kilos
-		<br/>
-{{calc_bmi}}
-	</div>
-
-<div id="Imperial" style="display:none">
-
-	{{ field.errors }}
-	Height:{{form.heightFeet}} ft
-	<br/>
-	Weight:{{form.heightInches}} in
-	<br/>
-	Weight:{{form.weightPounds}} lbs
-	<br/>
-{{calc_bmi}}
 </div>
-        <button type="submit" class="save btn">Save</button>
-    </form>
+<form method="POST" class="post-form">
+  {% csrf_token %}
+  Age:{{ form.age}} years
+  <div id="Metric" class = "Metric">
+    {{ field.errors }}
+    Height:{{form.heightMetres}} metres
+    <br>
+    <br/>
+    Weight:{{form.weightKilos}} kilos
+    <br/>
+    {{calc_bmi}}
+  </div>
+
+  <div id="Imperial" style="display:none">
+
+    {{ field.errors }}
+    Height:{{form.heightFeet}} ft
+    <br/>
+    Weight:{{form.heightInches}} in
+    <br/>
+    Weight:{{form.weightPounds}} lbs
+    <br/>
+    {{calc_bmi}}
+  </div>
+  <button type="submit" class="save btn">Save</button>
+</form>
 
 {% endblock %}
 </html>
